@@ -1,5 +1,4 @@
 #include "GildedRose.h"
-#include <iostream>
 
 const string SULFURAS = "Sulfuras, Hand of Ragnaros";
 const string AGED_BRIE = "Aged Brie";
@@ -24,7 +23,8 @@ CommonItem *ItemFactory::create(Item &item)
     {
         return new BackStagePass(item);
     }
-    else if (item.name == CONJURED) {
+    else if (item.name == CONJURED)
+    {
         return new Conjured(item);
     }
     return new CommonItem(item);
@@ -71,14 +71,15 @@ void BackStagePass::updateQuality()
     item.quality = min(item.quality, 50);
 }
 
-Conjured::Conjured(Item& item): CommonItem(item) {}
-void Conjured::updateQuality() {
+Conjured::Conjured(Item &item) : CommonItem(item) {}
+void Conjured::updateQuality()
+{
     item.quality = max(item.quality - 2, 0);
 }
 
 void GildedRose::updateQuality()
 {
-    for (Item& item: items)
+    for (Item &item : items)
     {
         ItemFactory::create(item)->updateSellin()->updateQuality();
     }
